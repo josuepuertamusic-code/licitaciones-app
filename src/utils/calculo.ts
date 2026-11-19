@@ -14,7 +14,9 @@ export function parsearNumero(texto: string): number | null {
   if (!t) return null;
   const normal = t.includes(",") ? t.replace(/\./g, "").replace(",", ".") : t;
   if (!/^-?\d+(\.\d+)?$/.test(normal)) return null;
-  return Number(normal);
+  const numero = Number(normal);
+  if (!Number.isFinite(numero) || Math.abs(numero) > Number.MAX_SAFE_INTEGER) return null;
+  return numero;
 }
 
 export function calcularOferta(
